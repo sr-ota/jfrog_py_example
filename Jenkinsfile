@@ -8,7 +8,11 @@ node {
         rtPip.resolver repo: 'py-virtual', server: server
         buildInfo = Artifactory.newBuildInfo()
     }
-
+    
+    stage ('Git Clone') {
+        git url: 'https://github.com/sr-ota/jfrog_py_example', branch: 'main',
+    }
+    
     stage ('Pip install') {
         sh "python3 -m venv ."
         rtPip.install buildInfo: buildInfo, args: "-r ./requirements.txt", envActivation: virtual_env_activation
