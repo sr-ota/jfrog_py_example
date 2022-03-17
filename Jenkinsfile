@@ -10,14 +10,14 @@ node {
     }
 
     stage ('Pip install') {
-        sh "python -m venv ."
+        sh "python3 -m venv ."
         rtPip.install buildInfo: buildInfo, args: "-r ./requirements.txt", envActivation: virtual_env_activation
     }
 
     stage ('Package and create distribution archives') {
         sh '''
             $virtual_env_activation
-            python setup.py sdist bdist_wheel
+            python3 setup.py sdist bdist_wheel
         '''
     }
 
