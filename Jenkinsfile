@@ -2,7 +2,7 @@ node {
     def server = Artifactory.server "jfrogeval"
     def rtPip = Artifactory.newPipBuild()
     def buildInfo
-    def virtual_env_activation = "s./bin/activate" // pip virtual-environment activation command
+    def virtual_env_activation = "./bin/activate" // pip virtual-environment activation command
   
     stage ('Artifactory configuration') {
         rtPip.resolver repo: 'py-virtual', server: server
@@ -10,6 +10,7 @@ node {
     }
 
     stage ('Pip install') {
+        sh "python3 -m venv ."
         rtPip.install buildInfo: buildInfo, args: "-r ./requirements.txt", envActivation: virtual_env_activation
     }
 
