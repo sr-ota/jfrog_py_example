@@ -5,7 +5,7 @@ node {
     def virtual_env_activation = ". ./bin/activate" 
   
     stage ('Artifactory configuration') {
-        rtPip.resolver repo: 'pypi-remote', server: server
+        rtPip.resolver repo: 'pypi-virtual', server: server
         buildInfo = Artifactory.newBuildInfo()
     }
     
@@ -15,7 +15,6 @@ node {
     
     stage ('Pip install') {
         sh "python3 -m venv ."
-        sh ". ./bin/activate"
         rtPip.install buildInfo: buildInfo, args: "-r ./requirements.txt", envActivation: virtual_env_activation
     }
 
