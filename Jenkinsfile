@@ -10,7 +10,7 @@ node {
     }
     
     stage ('Git Clone') {
-        git url: 'https://github.com/sr-ota/jfrog_py_example', branch: 'main',
+        git url: 'https://github.com/sr-ota/jfrog_py_example', branch: 'main'
     }
     
     stage ('Pip install') {
