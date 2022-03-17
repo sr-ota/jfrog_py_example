@@ -15,7 +15,7 @@ node {
     
     stage ('Pip install') {
         sh "python3 -m venv ."
-        rtPip.install buildInfo: buildInfo, args: "-r ./requirements.txt --no-cache-dir", envActivation: virtual_env_activation
+        rtPip.install buildInfo: buildInfo, args: "-r ./requirements.txt --no-cache-dir --force-reinstall", envActivation: virtual_env_activation
     }
 
     stage ('Package and create distribution archives') {
