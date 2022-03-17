@@ -24,12 +24,6 @@ node {
             python3 setup.py sdist bdist_wheel
         '''
     }
-    
-    stage ('XRay') {
-        xrayScan(
-            serverId: "jfrogeval"
-        )   
-    }
 
     stage ('Upload packages') {
         def uploadSpec = """{
@@ -45,5 +39,11 @@ node {
 
     stage ('Publish build info') {
         server.publishBuildInfo buildInfo
+    }
+    
+    stage ('XRay') {
+        xrayScan(
+            serverId: "jfrogeval"
+        )   
     }
 }
