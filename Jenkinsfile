@@ -5,7 +5,7 @@ node {
     def virtual_env_activation = ". ./bin/activate" 
   
     stage ('Artifactory configuration') {
-        rtPip.resolver repo: 'pypi-virtual', server: server
+        rtPip.resolver repo: 'py-virtual', server: server
         buildInfo = Artifactory.newBuildInfo()
     }
     
