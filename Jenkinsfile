@@ -1,4 +1,4 @@
-def server = Artifactory.server jfrogeval
+def server = Artifactory.server "jfrogeval"
 def rtPip = Artifactory.newPipBuild()
 def buildInfo
 def virtual_env_activation = "s./bin/activate" // pip virtual-environment activation command
