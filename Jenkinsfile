@@ -1,7 +1,7 @@
-def server = Artifactory.server SERVER_ID
+def server = Artifactory.server jfrogeval
 def rtPip = Artifactory.newPipBuild()
 def buildInfo
-def virtual_env_activation = "source /Users/myUser/venv-example/bin/activate" // pip virtual-environment activation command
+def virtual_env_activation = "s./bin/activate" // pip virtual-environment activation command
 
 
 pipeline {
@@ -11,23 +11,18 @@ pipeline {
     }
   
     stages {
-        stage ('Clone') {
-            git url: 'https://github.com/jfrog/project-examples.git'
-        }
-
         stage ('Artifactory configuration') {
-            rtPip.resolver repo: 'pypi-virtual', server: server
+            rtPip.resolver repo: 'py-virtual', server: server
             buildInfo = Artifactory.newBuildInfo()
         }
 
         stage ('Pip install') {
-            rtPip.install buildInfo: buildInfo, args: "-r python-example/requirements.txt", envActivation: virtual_env_activation
+            rtPip.install buildInfo: buildInfo, args: "-r ./requirements.txt", envActivation: virtual_env_activation
         }
 
         stage ('Package and create distribution archives') {
             sh '''
                 $virtual_env_activation
-                cd python-example
                 python setup.py sdist bdist_wheel
             '''
         }
@@ -36,8 +31,8 @@ pipeline {
             def uploadSpec = """{
                 "files": [
                     {
-                        "pattern": "python-example/dist/",
-                        "target": "pypi-virtual/"
+                        "pattern": "./dist/",
+                        "target": "py-virtual/"
                     }
                 ]
             }"""
