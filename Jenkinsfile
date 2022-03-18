@@ -3,7 +3,8 @@ node {
     def rtPip = Artifactory.newPipBuild()
     def buildInfo
     def virtual_env_activation = ". ./bin/activate" 
-  
+    def xrayResult
+    
     stage ('Artifactory configuration') {
         rtPip.resolver repo: 'py-virtual', server: server
         buildInfo = Artifactory.newBuildInfo()
@@ -42,8 +43,9 @@ node {
     }
     
     stage ('XRay') {
-        xrayScan(
+        xrayResult = xrayScan(
             serverId: "jfrogeval"
         )   
+        println xrayResult.dump()
     }
 }
