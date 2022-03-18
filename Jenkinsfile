@@ -26,17 +26,17 @@ node {
         '''
     }
 
-    stage ('Upload packages') {
-        def uploadSpec = """{
-            "files": [
-                {
-                    "pattern": "./dist/",
-                    "target": "py-virtual/"
-                }
-            ]
-        }"""
-        server.upload buildInfo: buildInfo, spec: uploadSpec
-    }
+    //stage ('Upload packages') {
+     //   def uploadSpec = """{
+      //      "files": [
+       //         {
+       //             "pattern": "./dist/",
+        //            "target": "py-virtual/"
+        //        }
+        //    ]
+      //  }"""
+     //   server.upload buildInfo: buildInfo, spec: uploadSpec
+   // }
 
     stage ('Publish build info') {
         server.publishBuildInfo buildInfo
