@@ -47,6 +47,6 @@ node {
             serverId: "jfrogeval",
             failBuild: false
         )   
-        println xrayResult.dump()
+        println xrayResult
     }
 }
