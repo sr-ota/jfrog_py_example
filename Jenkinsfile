@@ -44,7 +44,8 @@ node {
     
     stage ('XRay') {
         xrayResult = xrayScan(
-            serverId: "jfrogeval"
+            serverId: "jfrogeval",
+            failBuild: false
         )   
         println xrayResult.dump()
     }
