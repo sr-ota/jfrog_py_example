@@ -8,6 +8,7 @@ node {
     stage ('Artifactory configuration') {
         rtPip.resolver repo: 'py-virtual', server: server
         buildInfo = Artifactory.newBuildInfo()
+        buildInfo.project = 'x01'
     }
     
     stage ('Git Clone') {
